@@ -5,10 +5,10 @@ This is a demo of locale_data json files, that will (hopefully) allow
 access to use of data from more than one locale on MS Windows (which 
 doesn't natively support use of any but the one locale set in the
 preferences control pannel) and on *nix systems that have trouble with
-use of multiple locale uses in threaded apps..
+use of multiple locales in threaded apps.
 
 NOTE: This is ONLY A DEMO! It does work as intended, but fewer than 
-      half the number of available locales are currently included!
+      half the number of available locales are currently included.
       It's here mostly as a backup, but comments are welcome.
 
 
