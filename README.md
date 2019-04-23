@@ -7,17 +7,44 @@ doesn't natively support use of any but the one locale set in the
 preferences control pannel) and on *nix systems that have trouble with
 use of multiple locales in threaded apps.
 
-NOTE: This is ONLY A DEMO! It does work as intended, but fewer than 
-      half the number of available locales are currently included.
-      It's here mostly as a backup, but comments are welcome.
+NOTE: This is only a demp, but it does work as intended, and most of 
+      the locale data files for utf-8 are there. The exception is the
+      Galacian, Spain language pack, which I've been unable to 
+      successfully install.
 
 
-###### Instructions for creating locale_json tar (or zip!) files:
+#### Use
 
-The following has been tested on several Linux systems. It almost 
-certainly will not work on MS Windows.
+It's perfectly acceptable to download the `locale.json.tar.gz` file
+and place it in a convenient location. Eventually I'll settle on a
+location for the file - probably "~/.config/trix/assets", or possibly
+"~/.assets".
 
-First, place the assets directory in the same directory as trix. Eg.,
+```python3
+from trix import *
+f = trix.path("~/dev/locale_json.tar.gz").wrapper(encoding="utf8")
+
+f.names.sorted.table(w=4)  # list avaialable language files
+f.read("ber_MA.utf8")
+
+
+```
+
+
+#### Instructions for creating locale_json tar (or zip!) files:
+
+The set of locale files is not complete - only those files that are
+marked "utf-8" are in the resulting file (and, again, the "Galacian
+Spain" set is missing due to my inability to download it.)
+
+If you'd like to try importing your own set of language files, the 
+following has been tested on several Linux systems. NOTE: It almost 
+certainly will not work on any MS Windows system.
+
+
+###### Import instructions:
+
+First, place the assets directory in the same directory as trix.
 
     /dev
       /assets
@@ -35,12 +62,17 @@ contains an archive member for each language file available to your
 *nix system. Each member consists of a json dict structure containing
 locale formats.
 
-It took me about 17 seconds for the process to complete, but I was
-generating both tar and zip files. The lines for generating a zip
-archive containing the locale json members have been commented, as 
-zip was much larger than the tar, but if you prefer to comment tar  
-and use zip, it's very easy to see in the `locale_import` script how 
-to do that (or how to get both!) if you know any python at all.
+The resulting file will, for now, have to be moved manually to the
+~/.cache/trix/assets directory. If this turns out to be a project I
+want to pursue, I'll eventually improve the instalation process.
+
+It takes me about 20-30 seconds for the process to complete.
+
+The lines for generating a zip archive containing the locale json 
+members have been commented, as zip was much larger than the tar, but
+if you prefer to comment tar and use zip, it's very easy to see in 
+the `locale_import` script how to do that (or how to get both!) 
+if you know any python at all.
 
 
 
@@ -71,8 +103,8 @@ I have several more ideas for asset packages, including:
    
    This first `assets` module is not yet complete. It will take me a
    while to download and import all the various locale packages so as
-   to create a tar file with ALL locales (as json dict of format 
-   strings).
+   to create a tar file with at least one representation of each of 
+   the locales (as json dict of format strings).
  
  * unicode_data:
    An sqlite3 database to replace the `udata.query()` functionality.
@@ -86,7 +118,7 @@ I have several more ideas for asset packages, including:
  * web interface:
    A local http user interface to trix functionality.
  
- * trix language files:
+ * trix-specific language files:
    Language files for all error and informational messages generated
    by trix. (I'll do the english version and accept contributions
    for other language translations.)
